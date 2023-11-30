@@ -1,0 +1,26 @@
+* {
+	font-family: Verdana, Geneva, tahoma, sans-serif;
+}
+
+#container {
+	background-color: darkblue;
+	color: white;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 75%;
+}
+
+#question-block {
+	flex: 1;
+}
+
+.pie {
+    width: 400px;
+    height: 400px;
+    background-image: conic-gradient(orange 64%, blue 64%, blue 81%, black 81%);
+    border-radius: 50%;
+}
+
+
