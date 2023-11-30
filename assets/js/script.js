@@ -12,8 +12,7 @@ var answerBlockElement = document.getElementById("answer-block");
 // Both start/stopScore handle all internal score-handling
 var userScore;
 var scoreInterval;
-var answeredQuestions = [];
-
+var answeredQuestions = 0;
 const quizLength = Math.min(10, triviaQuestions.length);
 
 function startScore() {
@@ -37,7 +36,6 @@ function randPop(array) {
 	var randIndex = Math.floor(Math.random()*array.length);
 	return array.splice(randIndex, 1)[0];
 }
-
 
 function renderQuestion() {
 	var newQuestion = randPop(triviaQuestions);
@@ -68,10 +66,16 @@ function renderQuestion() {
 			if (newQuestion.answers[i] !== correctAnswer) {
 				userScore -= 10;
 			}
+			clearQuestion();
 			renderQuestion();
 		});
 		answerList.appendChild(answerChoiceElement);
 	}
+}
+// Clear the currently displayed question
+function clearQuestion() {
+	questionBlockElement.textContent = "";
+	answerBlockElement.innerHTML = "";
 }
 
 function gameLost() {
