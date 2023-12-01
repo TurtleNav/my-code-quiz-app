@@ -7,7 +7,9 @@ The goal of this challenge was to create a trivia app with the following feature
 * Use localStorage to store and retrieve user scores
 
 A demonstration of the app in-use:
-[demo.mp4](./demo.mp4)
+
+<video>
+
 <video controls width="250">
-  <source src="./demo.mp4" type="video/mp4" />
+  <source src="https://github.com/TurtleNav/my-code-quiz-app/assets/57142468/39286cdc-8808-4d88-a517-8134336ff78d" type="video/mp4" />
 </video>
