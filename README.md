@@ -7,4 +7,4 @@ The goal of this challenge was to create a trivia app with the following feature
 * Use localStorage to store and retrieve user scores
 
 A demonstration of the app in-use:
-![image](./demo.webm)
+![A user progresses through a quiz](./demo.webm)
