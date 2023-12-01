@@ -1,4 +1,6 @@
-
+/*
+	A data file that stores our trivia questions to declutter script.js
+*/
 var triviaQuestions = [
 	{
 		question: "What are the primitive types of javascript?",
@@ -12,9 +14,10 @@ var triviaQuestions = [
 		correctAnswer: 0
 	},
 	{
-		question: "What is hoisting in javascript?",
+		question: "Hoisting in javascript is when a variable is used before it is declared",
 		answers: [
-			"When a variable is used before it is declared",
+			"True",
+			"False"
 		],
 		correctAnswer: 0
 	},
