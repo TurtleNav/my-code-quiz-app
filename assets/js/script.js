@@ -92,19 +92,18 @@ function startGame() {
 	startScore();
 	renderQuestion();
 }
-//console.log(triviaQuestions[0].question);
 
-startButton.addEventListener("click", startGame); 
+// Handle the first game in a special manner
+function start1stGame() {
+	// Change the score and question count display to visibility:visible
+	document.getElementById("score-display").style.visibility = "visible";
 
-// console.log(document.visbilityState);
-// console.log(document.hidden);
-/*
-document.addEventListener("visibilitychange", (event) => {
-  if (document.visibilityState == "visible") {
-    console.log("tab is active");
-  } else {
-    console.log("tab is inactive");
-  }
-});
-*/
+	// Remove 'start-quiz' button
+	startButton.style.display = "none";
+
+	// Now we can start normally
+	startGame();
+}
+// Set up our main event listeners: the "Start Quiz" and "View Highscores" buttons
+startButton.addEventListener("click", start1stGame);
 

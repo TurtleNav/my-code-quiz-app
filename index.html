@@ -9,13 +9,15 @@
   </head>
   <body>
     <header>
+		<div id="highscore-view">View Highscores</div>
         <h1>Javascript Coding Quiz</h1>
-        <div id="user-score">100 </div>
-        <button type="button" id="start-button">Start</button>
-
+		<div id="score-display">
+			Score: <span id="user-score"></span>
+		</div>
     </header>
 
 	<main>
+		<button type="button" id="start-button">Start Quiz</button>
 		<div id="container">
 			<div id="question-block"></div>
 			<div id="answer-block"></div>
