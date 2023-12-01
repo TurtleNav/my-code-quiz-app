@@ -2,6 +2,7 @@ var userScoreElement = document.getElementById("user-score");
 var startButton = document.getElementById("start-button");
 var questionBlockElement = document.getElementById("question-block");
 var answerBlockElement = document.getElementById("answer-block");
+var feedbackBlockElement = document.getElementById("feedback-block");
 
 // The user score which is nothing more than a countdown implementation.
 // The theoretical max is 100. To avoid potential many-way ties in the
@@ -22,7 +23,7 @@ function startScore() {
 		userScoreElement.textContent = Math.ceil(userScore);
 		if (userScore <= 0) {
 			stopScore();
-			gameLost();
+			gameOver();
 		}
 	}, 10);
 }
@@ -63,11 +64,23 @@ function renderQuestion() {
 		answerChoiceElement.textContent = newQuestion.answers[i];
 		answerChoiceElement.setAttribute("class", "answer-choice");
 		answerChoiceElement.addEventListener("click", function() {
+			answeredQuestions += 1;
 			if (newQuestion.answers[i] !== correctAnswer) {
 				userScore -= 10;
+				feedbackBlockElement.textContent = "WRONG :(";
+			} else {
+				feedbackBlockElement.textContent = "CORRECT :)";
 			}
+			// Clear the feedback after 1 second
+			setTimeout(() => {
+				feedbackBlockElement.textContent = "";
+			}, 1000);
 			clearQuestion();
-			renderQuestion();
+			if (answeredQuestions >= quizLength) {
+				gameOver();
+			} else {
+				renderQuestion();
+			}
 		});
 		answerList.appendChild(answerChoiceElement);
 	}
@@ -78,15 +91,73 @@ function clearQuestion() {
 	answerBlockElement.innerHTML = "";
 }
 
-function gameLost() {
-	console.log("You lost!!");
-	// TODO - HANDLE LOST GAME
+function gameOver() {
+	clearInterval(scoreInterval);
+
+	// Create an input form for the user's high score
+	
+	formEl = document.createElement("form");
+
+	inputEl = document.createElement("input");
+	inputEl.setAttribute("type", "text");
+	inputEl.setAttribute("required", "true");
+	inputEl.setAttribute("placeholder", "Enter your Initials Here");
+	
+	submitButton = document.createElement("button");
+	submitButton.setAttribute("type", "submit");
+	submitButton.textContent = "Submit your Highscore!";
+
+	formEl.addEventListener("submit", (event) => {
+		event.preventDefault();
+		
+		// Store our high score in local storage
+		localStorage.setItem(inputEl.value, userScore);
+		renderHighScores();
+	});
+	formEl.appendChild(inputEl);
+	formEl.appendChild(submitButton);
+	answerBlockElement.appendChild(formEl);
+
 }
 
-function gameWon() {
-	console.log("You won!!");
-	// TODO - HANDLE WON GAME
+function renderHighScores() {
+	var h2El = document.createElement("h2");
+	h2El.textContent = "Highscores";
+	questionBlockElement.appendChild(h2El);
+
+	// Place an <ol> where a question would normally go
+	var highScoreList = document.createElement("ol");
+	var highestScores = [];
+	
+	for (let i=0; i<localStorage.length; i++) {
+		var nameT = localStorage.key(i);
+		var scoreT = Number.parseFloat(localStorage.getItem(nameT));
+		highestScores.push({
+			name: nameT,
+			score: scoreT
+		});
+	}
+
+	// Sort our scores
+	highestScores.sort(function(a, b) {
+		return b.score - a.score;
+	});
+
+	// Iterate through AT-MOST our top 10 highest scores
+	highestScores.slice(0, 10).forEach(function(element) {
+		listEl = document.createElement("li");
+		listEl.textContent = element.name + " -- " + element.score.toFixed(2).toString();
+		highScoreList.appendChild(listEl);
+	});
+	questionBlockElement.appendChild(highScoreList);
+
+	// Clear the add score button
+	answerBlockElement.innerHTML = "";
 }
+	
+
+
+
 
 function startGame() {
 	startScore();
@@ -106,4 +177,12 @@ function start1stGame() {
 }
 // Set up our main event listeners: the "Start Quiz" and "View Highscores" buttons
 startButton.addEventListener("click", start1stGame);
+
+// Attach the function 'renderHighscores' to our "view Highscores" button
+document.getElementById("highscore-view").addEventListener("click", renderHighScores);
+
+
+
+
+
 
