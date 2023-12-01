@@ -121,6 +121,11 @@ function gameOver() {
 }
 
 function renderHighScores() {
+	// Ensure pages HTML content is cleared
+	questionBlockElement.innerHTML = "";
+	answerBlockElement.innerHTML = "";
+
+	// Create a high score header
 	var h2El = document.createElement("h2");
 	h2El.textContent = "Highscores";
 	questionBlockElement.appendChild(h2El);
