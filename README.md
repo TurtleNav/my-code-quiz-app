@@ -8,8 +8,8 @@ The goal of this challenge was to create a trivia app with the following feature
 
 A demonstration of the app in-use:
 
-![](demo.mp4)
+![](demo.mp4#t=0.001)
 
 <video controls width="250">
-  <source src="demo.mp4" type="video/mp4" />
+  <source src="demo.mp4#t=0.001" type="video/mp4" />
 </video>
