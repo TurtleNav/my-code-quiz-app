@@ -8,8 +8,8 @@ The goal of this challenge was to create a trivia app with the following feature
 
 A demonstration of the app in-use:
 
-<video>
+[video](./demo.mp4)
 
 <video controls width="250">
-  <source src="https://github.com/TurtleNav/my-code-quiz-app/assets/57142468/39286cdc-8808-4d88-a517-8134336ff78d" type="video/mp4" />
+  <source src="./demo.mp4" type="video/mp4" />
 </video>
